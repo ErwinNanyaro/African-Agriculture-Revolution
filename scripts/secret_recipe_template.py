@@ -1,6 +1,6 @@
 """
-🚀 REVOLUTIONARY DATA SCIENCE TEMPLATE FOR AFRICAN AGRICULTURE
-From SPSS/Stata to Modern Data Science - The Complete Pipeline
+🚀 AFRICAN AGRICULTURE REVOLUTION: SECRET RECIPE TEMPLATE
+Transform SPSS/Stata analyses into modern data science pipelines
 """
 
 import pandas as pd
@@ -10,563 +10,392 @@ import seaborn as sns
 from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
+import os
 
 # Set professional style
 plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
-# ============================================================
-# STEP 0: THE REVOLUTIONARY MINDSET
-# ============================================================
-
-class AfricanAgricultureRevolution:
-    """The mindset shift from old methods to modern data science"""
+class RevolutionMindset:
+    """The revolutionary mindset shift for African agriculture data science"""
     
     @staticmethod
-    def mindset():
+    def manifesto():
         print("="*80)
         print("🌍 AFRICAN AGRICULTURE DATA SCIENCE REVOLUTION")
         print("="*80)
-        print("\n💡 MINDSET SHIFT:")
-        print("   • FROM: SPSS/Stata → TO: Python/R with ML pipelines")
-        print("   • FROM: Static reports → TO: Interactive dashboards")
-        print("   • FROM: Academic papers → TO: Actionable business insights")
-        print("   • FROM: One-time analysis → TO: Continuous value creation")
+        print("\n💡 MANIFESTO:")
+        print("   • FROM SPSS/Stata → TO Python ML pipelines")
+        print("   • FROM Static reports → TO Interactive dashboards")
+        print("   • FROM Academic papers → TO Business insights")
+        print("   • FROM One-time analysis → TO Continuous value creation")
         print("\n🎯 MISSION: Transform African agriculture through data science")
-        print("💰 GOAL: Create solutions organizations will pay for")
+        print("💰 VALUE: Create solutions organizations will pay for")
         print("="*80)
         return True
 
-# ============================================================
-# STEP 1: DATA UNDERSTANDING & DIAGNOSTICS
-# ============================================================
-
-def diagnose_data(df, dataset_name="Agricultural Dataset"):
+def revolutionary_diagnose(df, dataset_name):
     """
-    Revolutionary data understanding - Beyond basic EDA
+    Comprehensive data diagnosis for agricultural surveys
     """
-    print(f"\n🔍 STEP 1: COMPREHENSIVE DATA DIAGNOSIS - {dataset_name}")
+    print(f"\n🔍 STEP 1: REVOLUTIONARY DATA DIAGNOSIS - {dataset_name}")
     print("-"*60)
     
-    insights = {
-        'basic_info': {},
-        'quality_metrics': {},
-        'revolutionary_insights': []
-    }
+    insights = {'shape': df.shape, 'columns': list(df.columns)}
     
-    # 1A: Basic Information
-    insights['basic_info']['shape'] = df.shape
-    insights['basic_info']['memory_mb'] = df.memory_usage(deep=True).sum() / (1024**2)
+    print(f"📊 Dataset: {df.shape[0]} farmers × {df.shape[1]} variables")
+    print(f"📅 Time collected: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
-    print(f"📊 Dataset Shape: {df.shape[0]} farmers × {df.shape[1]} variables")
-    print(f"💾 Memory Usage: {insights['basic_info']['memory_mb']:.2f} MB")
-    
-    # 1B: Column Intelligence
-    print("\n📋 COLUMN INTELLIGENCE:")
-    column_types = {
+    # Auto-categorize columns
+    categories = {
         'demographic': [],
-        'behavioral': [],
-        'outcome': [],
-        'resource': [],
-        'social': []
+        'social_capital': [],
+        'production': [],
+        'challenges': [],
+        'outcomes': []
     }
     
     for col in df.columns:
-        # Auto-categorize columns
         col_lower = str(col).lower()
         
-        if any(word in col_lower for word in ['age', 'education', 'gender', 'year']):
-            column_types['demographic'].append(col)
-        elif any(word in col_lower for word in ['yield', 'income', 'profit', 'satisfaction']):
-            column_types['outcome'].append(col)
-        elif any(word in col_lower for word in ['group', 'share', 'trust', 'cooperat']):
-            column_types['social'].append(col)
-        elif any(word in col_lower for word in ['access', 'resource', 'tool', 'input']):
-            column_types['resource'].append(col)
-        else:
-            column_types['behavioral'].append(col)
+        if any(word in col_lower for word in ['age', 'education', 'gender']):
+            categories['demographic'].append(col)
+        elif any(word in col_lower for word in ['trust', 'group', 'share', 'cooperat']):
+            categories['social_capital'].append(col)
+        elif any(word in col_lower for word in ['farm', 'yield', 'acre', 'production']):
+            categories['production'].append(col)
+        elif any(word in col_lower for word in ['challenge', 'problem', 'difficult']):
+            categories['challenges'].append(col)
+        elif any(word in col_lower for word in ['satisfaction', 'improve', 'increase']):
+            categories['outcomes'].append(col)
     
-    for cat, cols in column_types.items():
+    print("\n📋 VARIABLE CATEGORIES:")
+    for cat, cols in categories.items():
         if cols:
             print(f"   • {cat.title()}: {len(cols)} variables")
     
-    # 1C: Data Quality Revolution
-    print("\n🧪 DATA QUALITY METRICS:")
-    
-    quality_issues = []
-    for col in df.columns:
-        null_pct = df[col].isnull().mean() * 100
-        unique_pct = df[col].nunique() / len(df) * 100
-        
-        if null_pct > 20:
-            quality_issues.append(f"High missing values in {col} ({null_pct:.1f}%)")
-        
-        if unique_pct > 90 and df[col].dtype == 'object':
-            quality_issues.append(f"Potential free-text in {col}")
-    
-    if quality_issues:
-        print("   ⚠️ Issues found:")
-        for issue in quality_issues[:3]:  # Show top 3
-            print(f"     - {issue}")
-    else:
-        print("   ✅ Good data quality")
-    
-    # 1D: First 5 Revolutionary Insights
-    print("\n💡 FIRST 5 REVOLUTIONARY INSIGHTS:")
-    
-    # Insight 1: Data collection patterns
-    if 'start' in df.columns and 'end' in df.columns:
-        df['duration_minutes'] = (pd.to_datetime(df['end']) - pd.to_datetime(df['start'])).dt.total_seconds() / 60
-        avg_duration = df['duration_minutes'].mean()
-        insights['revolutionary_insights'].append(f"Average survey duration: {avg_duration:.1f} minutes")
-        print(f"   1. Surveys took {avg_duration:.1f} minutes on average")
-    
-    # Insight 2: Response patterns
-    for col in df.columns[:3]:  # First 3 columns
-        if df[col].dtype == 'object':
-            mode_val = df[col].mode()[0] if not df[col].mode().empty else "N/A"
-            insights['revolutionary_insights'].append(f"Most common response in {col}: {mode_val}")
-            print(f"   2. Most common in {col[:20]}...: {mode_val}")
-            break
-    
     return insights
 
-# ============================================================
-# STEP 2: REVOLUTIONARY DATA CLEANING
-# ============================================================
-
-def revolutionary_clean(df, agricultural_context=True):
+def revolutionary_clean(df):
     """
-    Clean agricultural survey data intelligently
+    Intelligent cleaning for agricultural survey data
     """
     print(f"\n🧹 STEP 2: REVOLUTIONARY DATA CLEANING")
     print("-"*60)
     
     df_clean = df.copy()
-    transformations = []
     
-    # 2A: Intelligent Missing Value Imputation
-    print("🔧 Intelligent Missing Value Handling:")
-    
-    for col in df_clean.columns:
-        null_count = df_clean[col].isnull().sum()
-        
-        if null_count > 0:
-            null_pct = (null_count / len(df_clean)) * 100
-            
-            # Strategy based on column type and missing percentage
-            if df_clean[col].dtype in ['int64', 'float64']:
-                if null_pct < 5:
-                    # Small missing, use median
-                    df_clean[col] = df_clean[col].fillna(df_clean[col].median())
-                    transformations.append(f"Numeric {col}: Filled {null_count} missing with median")
-                else:
-                    # Large missing, use advanced imputation
-                    df_clean[col] = df_clean[col].fillna(df_clean[col].mean())
-                    transformations.append(f"Numeric {col}: Filled {null_count} missing with mean")
-            
-            elif df_clean[col].dtype == 'object':
-                if 'not' in str(col).lower() or 'no' in str(col).lower():
-                    # Likely negative response
-                    df_clean[col] = df_clean[col].fillna('no')
-                else:
-                    # Use mode
-                    if not df_clean[col].mode().empty:
-                        df_clean[col] = df_clean[col].fillna(df_clean[col].mode()[0])
-                        transformations.append(f"Categorical {col}: Filled {null_count} missing with mode")
-    
-    # 2B: Revolutionary Encoding for Agricultural Data
-    print("\n🎯 Revolutionary Encoding for Survey Data:")
-    
-    # Define comprehensive encoding schemes
-    likert_5_mapping = {
-        'not_at_all': 1, 'never': 1,
-        'slightly': 2, 'rarely': 2,
-        'moderately': 3, 'occasionally': 3,
-        'significantly': 4, 'frequently': 4,
+    # Define encoding schemes
+    LIKERT_MAP = {
+        'not_at_all': 1, 'never': 1, 'not_effective': 1,
+        'slightly': 2, 'rarely': 2, 'slightly_effective': 2,
+        'moderately': 3, 'occasionally': 3, 'moderately_effective': 3,
+        'significantly': 4, 'frequently': 4, 'very_effective': 4,
         'completely': 5, 'always': 5
     }
     
-    satisfaction_mapping = {
-        'not_satisfied': 1,
-        'slightly_satisfied': 2,
-        'moderately_satisfied': 3,
-        'very_satisfied': 4
+    YIELD_MAP = {
+        'decreased': -1,
+        'remained_the_same': 0,
+        'increased': 1
     }
     
-    accessibility_mapping = {
-        'not_accessible': 1,
-        'slightly_accessible': 2,
-        'moderately_accessible': 3,
-        'very_accessible': 4
+    AGE_MAP = {
+        'below_30': 25,
+        '30_40': 35,
+        '41_50': 45,
+        'above_50': 55
     }
     
-    # Auto-detect and encode
-    encoded_columns = []
+    # 1. Encode categorical variables
+    print("🔧 Encoding categorical variables...")
+    
     for col in df_clean.columns:
-        col_str = str(df_clean[col].iloc[0]) if len(df_clean) > 0 else ""
-        
         # Check for Likert scales
-        if any(term in col_str for term in likert_5_mapping.keys()):
-            df_clean[f"{col}_encoded"] = df_clean[col].map(likert_5_mapping)
-            encoded_columns.append(col)
+        sample_val = str(df_clean[col].iloc[0]) if len(df_clean) > 0 else ""
         
-        # Check for satisfaction
-        elif any(term in col_str for term in satisfaction_mapping.keys()):
-            df_clean[f"{col}_encoded"] = df_clean[col].map(satisfaction_mapping)
-            encoded_columns.append(col)
+        for key in LIKERT_MAP.keys():
+            if key in sample_val.lower():
+                df_clean[f"{col}_encoded"] = df_clean[col].map(LIKERT_MAP)
+                break
+        
+        # Check for yield changes
+        if 'yield' in col.lower() and any(key in sample_val.lower() for key in YIELD_MAP.keys()):
+            df_clean[f"{col}_encoded"] = df_clean[col].map(YIELD_MAP)
+        
+        # Check for age groups
+        if 'age' in col.lower() and any(key in sample_val.lower() for key in AGE_MAP.keys()):
+            df_clean[f"{col}_numeric"] = df_clean[col].map(AGE_MAP)
     
-    print(f"   Encoded {len(encoded_columns)} Likert/satisfaction variables")
-    
-    # 2C: Create Composite Indicators
-    print("\n📊 Creating Composite Indicators:")
+    # 2. Create composite indices
+    print("\n📊 Creating composite indices...")
     
     # Social Capital Index
     social_cols = [col for col in df_clean.columns if any(term in str(col).lower() 
-                  for term in ['trust', 'share', 'group', 'cooperat', 'network'])]
+                  for term in ['trust', 'share', 'group', 'cooperat', 'network', 'member'])]
+    social_encoded = [f"{col}_encoded" for col in social_cols if f"{col}_encoded" in df_clean.columns]
     
-    if social_cols:
-        # Get encoded versions
-        social_encoded = [f"{col}_encoded" for col in social_cols if f"{col}_encoded" in df_clean.columns]
-        if social_encoded:
-            df_clean['social_capital_index'] = df_clean[social_encoded].mean(axis=1)
-            print(f"   Created Social Capital Index from {len(social_encoded)} variables")
+    if social_encoded:
+        df_clean['social_capital_index'] = df_clean[social_encoded].mean(axis=1)
+        print(f"   Created Social Capital Index from {len(social_encoded)} variables")
     
     # Resource Access Index
     resource_cols = [col for col in df_clean.columns if any(term in str(col).lower()
-                    for term in ['access', 'resource', 'tool', 'input', 'seed'])]
+                    for term in ['access', 'resource', 'tool', 'input', 'seed', 'training'])]
+    resource_encoded = [f"{col}_encoded" for col in resource_cols if f"{col}_encoded" in df_clean.columns]
     
-    if resource_cols:
-        resource_encoded = [f"{col}_encoded" for col in resource_cols if f"{col}_encoded" in df_clean.columns]
-        if resource_encoded:
-            df_clean['resource_access_index'] = df_clean[resource_encoded].mean(axis=1)
-            print(f"   Created Resource Access Index from {len(resource_encoded)} variables")
+    if resource_encoded:
+        df_clean['resource_access_index'] = df_clean[resource_encoded].mean(axis=1)
+        print(f"   Created Resource Access Index from {len(resource_encoded)} variables")
     
-    # 2D: Create Target Variable for Predictive Modeling
-    if agricultural_context:
-        # Look for yield/income/production columns
-        outcome_cols = [col for col in df_clean.columns if any(term in str(col).lower()
-                       for term in ['yield', 'income', 'production', 'profit', 'revenue'])]
-        
-        if outcome_cols:
-            # Create binary target: high vs low performance
-            for col in outcome_cols:
-                if f"{col}_encoded" in df_clean.columns:
-                    median_val = df_clean[f"{col}_encoded"].median()
-                    df_clean['high_performance'] = (df_clean[f"{col}_encoded"] > median_val).astype(int)
-                    print(f"   Created binary target: high_performance")
-                    break
+    # 3. Handle missing values
+    print("\n🧪 Handling missing values...")
+    for col in df_clean.columns:
+        if df_clean[col].dtype in ['int64', 'float64']:
+            df_clean[col] = df_clean[col].fillna(df_clean[col].median())
+        elif df_clean[col].dtype == 'object':
+            df_clean[col] = df_clean[col].fillna('Unknown')
     
-    return df_clean, transformations
+    return df_clean
 
-# ============================================================
-# STEP 3: REVOLUTIONARY FEATURE ENGINEERING
-# ============================================================
-
-def revolutionary_features(df, context='strawberry_farmers'):
+def revolutionary_features(df):
     """
     Create powerful features for agricultural analysis
     """
-    print(f"\n🔧 STEP 3: REVOLUTIONARY FEATURE ENGINEERING - {context}")
+    print(f"\n🔧 STEP 3: REVOLUTIONARY FEATURE ENGINEERING")
     print("-"*60)
     
     df_features = df.copy()
-    created_features = []
     
-    # 3A: Demographic Power Features
-    print("👥 Demographic Power Features:")
-    
-    # Age parsing
-    age_cols = [col for col in df_features.columns if 'age' in str(col).lower()]
-    if age_cols:
-        age_col = age_cols[0]
-        
-        # Extract numeric age from ranges
-        def extract_age_numeric(age_str):
-            if pd.isna(age_str):
-                return np.nan
-            age_str = str(age_str)
-            
-            if 'below' in age_str:
-                return 25  # Approximate
-            elif '30_40' in age_str:
-                return 35
-            elif '41_50' in age_str:
-                return 45
-            elif 'above' in age_str:
-                return 55
-            else:
-                # Try to extract numbers
-                import re
-                numbers = re.findall(r'\d+', age_str)
-                if numbers:
-                    return float(numbers[0])
-                return np.nan
-        
-        df_features['age_numeric'] = df_features[age_col].apply(extract_age_numeric)
-        created_features.append('age_numeric')
-        print(f"   Created: age_numeric from {age_col}")
-    
-    # 3B: Experience Features
-    exp_cols = [col for col in df_features.columns if any(term in str(col).lower() 
-                for term in ['experience', 'year', 'season'])]
-    
-    if exp_cols:
-        exp_col = exp_cols[0]
-        
-        def extract_experience_years(exp_str):
-            if pd.isna(exp_str):
-                return np.nan
-            
-            exp_str = str(exp_str).lower()
-            
-            if 'less_than' in exp_str:
-                return 1
-            elif '2_5' in exp_str:
-                return 3.5
-            elif '6_10' in exp_str:
-                return 8
-            elif 'more_than' in exp_str or '10' in exp_str:
-                return 12
-            else:
-                # Try to extract numbers
-                import re
-                numbers = re.findall(r'\d+', exp_str)
-                if numbers:
-                    return float(numbers[0])
-                return np.nan
-        
-        df_features['experience_years'] = df_features[exp_col].apply(extract_experience_years)
-        created_features.append('experience_years')
-        print(f"   Created: experience_years from {exp_col}")
-    
-    # 3C: Farm Size Features
+    # 1. Extract farm size
     size_cols = [col for col in df_features.columns if any(term in str(col).lower() 
-                 for term in ['acre', 'hectare', 'size', 'farm'])]
+                 for term in ['acre', 'farm', 'size', 'large'])]
     
     if size_cols:
         size_col = size_cols[0]
         
-        def extract_farm_size_acres(size_str):
+        def parse_farm_size(size_str):
             if pd.isna(size_str):
                 return np.nan
             
             size_str = str(size_str).lower()
             
-            if 'less_than' in size_str and 'acre' in size_str:
+            if 'less_than' in size_str and '1' in size_str:
                 return 0.5
             elif '1_3' in size_str:
-                return 2
+                return 2.0
             elif '4_6' in size_str:
-                return 5
+                return 5.0
             elif 'more_than' in size_str and '6' in size_str:
-                return 8
+                return 8.0
             else:
                 return np.nan
         
-        df_features['farm_size_acres'] = df_features[size_col].apply(extract_farm_size_acres)
-        created_features.append('farm_size_acres')
-        print(f"   Created: farm_size_acres from {size_col}")
+        df_features['farm_size_acres'] = df_features[size_col].apply(parse_farm_size)
+        print(f"   Created: farm_size_acres")
     
-    # 3D: Create Powerful Interaction Features
-    print("\n💫 Creating Interaction Features:")
+    # 2. Create farmer segments
+    print("\n🎯 Creating farmer segments...")
     
-    # Farmer Sophistication Score
-    if 'age_numeric' in df_features.columns and 'experience_years' in df_features.columns:
-        df_features['farmer_sophistication'] = (
-            df_features['age_numeric'] * 0.3 + 
-            df_features['experience_years'] * 0.7
-        )
-        created_features.append('farmer_sophistication')
-        print("   Created: farmer_sophistication (age × experience)")
-    
-    # Resource-Experience Interaction
-    if 'experience_years' in df_features.columns and 'resource_access_index' in df_features.columns:
-        df_features['experienced_resource_access'] = (
-            df_features['experience_years'] * df_features['resource_access_index']
-        )
-        created_features.append('experienced_resource_access')
-        print("   Created: experienced_resource_access")
-    
-    # 3E: Create Segments/Clusters
-    print("\n🎯 Creating Farmer Segments:")
-    
-    # Segment by experience and resources
-    if 'experience_years' in df_features.columns and 'resource_access_index' in df_features.columns:
+    if 'social_capital_index' in df_features.columns and 'resource_access_index' in df_features.columns:
+        # Segment by social capital and resource access
         conditions = [
-            (df_features['experience_years'] >= 5) & (df_features['resource_access_index'] >= 3),
-            (df_features['experience_years'] < 5) & (df_features['resource_access_index'] >= 3),
-            (df_features['experience_years'] >= 5) & (df_features['resource_access_index'] < 3),
-            (df_features['experience_years'] < 5) & (df_features['resource_access_index'] < 3)
+            (df_features['social_capital_index'] >= 3) & (df_features['resource_access_index'] >= 3),
+            (df_features['social_capital_index'] >= 3) & (df_features['resource_access_index'] < 3),
+            (df_features['social_capital_index'] < 3) & (df_features['resource_access_index'] >= 3),
+            (df_features['social_capital_index'] < 3) & (df_features['resource_access_index'] < 3)
         ]
         
-        choices = ['Experienced_HighResource', 'New_HighResource', 
-                  'Experienced_LowResource', 'New_LowResource']
+        choices = ['HighSocial_HighResource', 'HighSocial_LowResource', 
+                  'LowSocial_HighResource', 'LowSocial_LowResource']
         
         df_features['farmer_segment'] = np.select(conditions, choices, default='Other')
-        created_features.append('farmer_segment')
-        print(f"   Created: farmer_segment with {df_features['farmer_segment'].nunique()} segments")
+        print(f"   Created {df_features['farmer_segment'].nunique()} farmer segments")
     
-    print(f"\n✅ Created {len(created_features)} revolutionary features")
+    # 3. Create performance score
+    yield_cols = [col for col in df_features.columns if 'yield' in str(col).lower() 
+                  and 'encoded' in str(col)]
     
-    return df_features, created_features
+    if yield_cols:
+        df_features['performance_score'] = df_features[yield_cols].mean(axis=1)
+        print(f"   Created performance_score from {len(yield_cols)} yield variables")
+    
+    return df_features
 
-# ============================================================
-# STEP 4: REVOLUTIONARY VISUALIZATION
-# ============================================================
-
-def revolutionary_visualizations(df, context='Strawberry Farmers'):
+def revolutionary_visualize(df, context="Strawberry Farmers"):
     """
     Create publication-quality visualizations
     """
-    print(f"\n📊 STEP 4: REVOLUTIONARY VISUALIZATIONS - {context}")
+    print(f"\n📊 STEP 4: REVOLUTIONARY VISUALIZATIONS")
     print("-"*60)
     
-    # Create professional figure
+    # Create figure with fewer plots if data is limited
     fig = plt.figure(figsize=(20, 15))
-    fig.suptitle(f'African Agriculture Analytics: {context}', 
-                 fontsize=24, fontweight='bold', y=1.02)
+    fig.suptitle(f'African Agriculture Analytics: {context}', fontsize=20, fontweight='bold')
     
-    # 4A: Social Capital Distribution
-    ax1 = plt.subplot(3, 3, 1)
+    plot_count = 0
+    
+    # Plot 1: Social Capital Distribution
     if 'social_capital_index' in df.columns:
-        sns.histplot(df['social_capital_index'], kde=True, color='blue', ax=ax1)
-        mean_sc = df['social_capital_index'].mean()
-        ax1.axvline(mean_sc, color='red', linestyle='--', label=f'Mean: {mean_sc:.2f}')
-        ax1.set_title('Social Capital Index Distribution', fontweight='bold')
-        ax1.set_xlabel('Social Capital Score')
+        plot_count += 1
+        ax1 = plt.subplot(3, 3, plot_count)
+        sns.histplot(df['social_capital_index'], kde=True, color='blue', ax=ax1, bins=20)
+        ax1.axvline(df['social_capital_index'].mean(), color='red', linestyle='--', 
+                    label=f'Mean: {df["social_capital_index"].mean():.2f}')
+        ax1.set_title('Social Capital Distribution', fontweight='bold')
+        ax1.set_xlabel('Social Capital Index')
         ax1.set_ylabel('Frequency')
         ax1.legend()
     
-    # 4B: Resource Access by Experience
-    ax2 = plt.subplot(3, 3, 2)
-    if 'experience_years' in df.columns and 'resource_access_index' in df.columns:
-        # Create experience bins
-        df['exp_bin'] = pd.cut(df['experience_years'], bins=5)
-        sns.boxplot(x='exp_bin', y='resource_access_index', data=df, ax=ax2, palette='viridis')
-        ax2.set_title('Resource Access by Farming Experience', fontweight='bold')
-        ax2.set_xlabel('Experience (years)')
-        ax2.set_ylabel('Resource Access Index')
-        ax2.tick_params(axis='x', rotation=45)
+    # Plot 2: Performance Score Distribution
+    if 'performance_score' in df.columns:
+        plot_count += 1
+        ax2 = plt.subplot(3, 3, plot_count)
+        sns.histplot(df['performance_score'], kde=True, color='green', ax=ax2, bins=20)
+        ax2.set_title('Performance Score Distribution', fontweight='bold')
+        ax2.set_xlabel('Performance Score')
+        ax2.set_ylabel('Frequency')
     
-    # 4C: Farmer Segments
-    ax3 = plt.subplot(3, 3, 3)
-    if 'farmer_segment' in df.columns:
-        segment_counts = df['farmer_segment'].value_counts()
-        colors = plt.cm.Set3(np.linspace(0, 1, len(segment_counts)))
-        wedges, texts, autotexts = ax3.pie(segment_counts.values, labels=segment_counts.index,
-                                          autopct='%1.1f%%', colors=colors, startangle=90)
-        ax3.set_title('Farmer Segments Distribution', fontweight='bold')
-        plt.setp(autotexts, size=10, weight="bold")
+    # Plot 3: Resource Access Distribution
+    if 'resource_access_index' in df.columns:
+        plot_count += 1
+        ax3 = plt.subplot(3, 3, plot_count)
+        # Fixed boxplot
+        box_data = [df['resource_access_index'].dropna().values]
+        ax3.boxplot(box_data, patch_artist=True, 
+                   boxprops=dict(facecolor='orange'))
+        ax3.set_title('Resource Access Distribution', fontweight='bold')
+        ax3.set_ylabel('Resource Access Index')
+        ax3.set_xticklabels(['Resource Access'])
     
-    # 4D: Correlation Heatmap
-    ax4 = plt.subplot(3, 3, 4)
-    # Select numeric columns
+    # Plot 4: Education Distribution
+    edu_cols = [col for col in df.columns if 'education' in str(col).lower()]
+    if edu_cols:
+        plot_count += 1
+        ax4 = plt.subplot(3, 3, plot_count)
+        edu_col = edu_cols[0]
+        edu_counts = df[edu_col].value_counts()
+        edu_counts.plot(kind='bar', color='green', ax=ax4)
+        ax4.set_title('Education Level Distribution', fontweight='bold')
+        ax4.set_xlabel('Education Level')
+        ax4.set_ylabel('Count')
+        ax4.tick_params(axis='x', rotation=45)
+    
+    # Plot 5: Farm Size Distribution
+    if 'farm_size_acres' in df.columns:
+        plot_count += 1
+        ax5 = plt.subplot(3, 3, plot_count)
+        df['farm_size_acres'].hist(bins=20, color='purple', ax=ax5, edgecolor='black')
+        ax5.set_title('Farm Size Distribution', fontweight='bold')
+        ax5.set_xlabel('Farm Size (acres)')
+        ax5.set_ylabel('Count')
+    
+    # Plot 6: Age Distribution
+    age_cols = [col for col in df.columns if 'age_numeric' in str(col)]
+    if age_cols:
+        plot_count += 1
+        ax6 = plt.subplot(3, 3, plot_count)
+        df[age_cols[0]].hist(bins=15, color='teal', ax=ax6, edgecolor='black')
+        ax6.set_title('Age Distribution', fontweight='bold')
+        ax6.set_xlabel('Age (years)')
+        ax6.set_ylabel('Count')
+    
+    # Plot 7: Social Capital vs Performance
+    if 'social_capital_index' in df.columns and 'performance_score' in df.columns:
+        plot_count += 1
+        ax7 = plt.subplot(3, 3, plot_count)
+        sns.scatterplot(x='social_capital_index', y='performance_score', 
+                       data=df, alpha=0.6, ax=ax7)
+        
+        # Add trend line
+        if len(df) > 1:
+            z = np.polyfit(df['social_capital_index'], df['performance_score'], 1)
+            p = np.poly1d(z)
+            ax7.plot(df['social_capital_index'], p(df['social_capital_index']), 
+                    "r--", alpha=0.8)
+        
+        ax7.set_title('Social Capital vs Performance', fontweight='bold')
+        ax7.set_xlabel('Social Capital Index')
+        ax7.set_ylabel('Performance Score')
+    
+    # Plot 8: Challenges Analysis
+    challenge_cols = [col for col in df.columns if 'challenge' in str(col).lower()]
+    if challenge_cols:
+        plot_count += 1
+        ax8 = plt.subplot(3, 3, plot_count)
+        challenge_col = challenge_cols[0]
+        
+        # Extract individual challenges
+        all_challenges = []
+        for val in df[challenge_col].dropna():
+            if isinstance(val, str):
+                challenges = val.replace('_', ' ').split()
+                all_challenges.extend(challenges)
+        
+        from collections import Counter
+        challenge_counts = Counter(all_challenges)
+        top_challenges = dict(challenge_counts.most_common(5))
+        
+        if top_challenges:
+            ax8.barh(list(top_challenges.keys()), list(top_challenges.values()), color='salmon')
+            ax8.set_title('Top 5 Challenges', fontweight='bold')
+            ax8.set_xlabel('Frequency')
+    
+    # Plot 9: Correlation Heatmap
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     if len(numeric_cols) > 2:
+        plot_count += 1
+        ax9 = plt.subplot(3, 3, plot_count)
         corr_matrix = df[numeric_cols].corr()
         mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
         sns.heatmap(corr_matrix, mask=mask, annot=True, fmt='.2f', cmap='coolwarm', 
-                   center=0, square=True, ax=ax4, cbar_kws={"shrink": 0.8})
-        ax4.set_title('Feature Correlation Matrix', fontweight='bold')
+                   center=0, square=True, ax=ax9, cbar_kws={"shrink": 0.8})
+        ax9.set_title('Feature Correlation Matrix', fontweight='bold')
     
-    # 4E: Age vs Social Capital
-    ax5 = plt.subplot(3, 3, 5)
-    if 'age_numeric' in df.columns and 'social_capital_index' in df.columns:
-        sns.scatterplot(x='age_numeric', y='social_capital_index', data=df, 
-                       hue='farmer_segment' if 'farmer_segment' in df.columns else None,
-                       alpha=0.7, ax=ax5)
-        ax5.set_title('Age vs Social Capital', fontweight='bold')
-        ax5.set_xlabel('Age (years)')
-        ax5.set_ylabel('Social Capital Index')
+    # Hide empty subplots
+    for i in range(plot_count + 1, 10):
+        ax = plt.subplot(3, 3, i)
+        ax.axis('off')
     
-    # 4F: Performance by Segment
-    ax6 = plt.subplot(3, 3, 6)
-    if 'farmer_segment' in df.columns and 'high_performance' in df.columns:
-        performance_by_segment = df.groupby('farmer_segment')['high_performance'].mean().sort_values()
-        performance_by_segment.plot(kind='barh', color='green', ax=ax6)
-        ax6.set_title('High Performance Rate by Segment', fontweight='bold')
-        ax6.set_xlabel('Proportion High Performing')
-        ax6.set_ylabel('Farmer Segment')
-    
+    # ==== FIXED SECTION ====
     plt.tight_layout()
-    plt.show()
+    plt.show(block=False)  # This allows script to continue
+    plt.pause(5)  # Show graphs for 5 seconds
+    plt.close('all')  # Close all figures
+    # =======================
     
-    # 4G: Advanced Analysis Visualization
-    fig2, axes = plt.subplots(1, 2, figsize=(15, 6))
-    
-    # Network Analysis (if group membership data exists)
-    ax7 = axes[0]
-    group_cols = [col for col in df.columns if any(term in str(col).lower() 
-                 for term in ['group', 'member', 'association'])]
-    
-    if group_cols:
-        group_col = group_cols[0]
-        if df[group_col].dtype == 'object':
-            group_counts = df[group_col].value_counts()
-            group_counts.plot(kind='bar', color='purple', ax=ax7)
-            ax7.set_title('Farmer Group Membership', fontweight='bold')
-            ax7.set_xlabel('Group Membership')
-            ax7.set_ylabel('Count')
-            ax7.tick_params(axis='x', rotation=45)
-    
-    # Training Impact Analysis
-    ax8 = axes[1]
-    training_cols = [col for col in df.columns if any(term in str(col).lower() 
-                    for term in ['training', 'train', 'workshop'])]
-    
-    if training_cols and 'high_performance' in df.columns:
-        training_col = training_cols[0]
-        if df[training_col].nunique() <= 5:  # Likely yes/no or frequency
-            performance_by_training = df.groupby(training_col)['high_performance'].mean()
-            performance_by_training.plot(kind='bar', color='orange', ax=ax8)
-            ax8.set_title('Impact of Training on Performance', fontweight='bold')
-            ax8.set_xlabel('Received Training')
-            ax8.set_ylabel('Proportion High Performing')
-    
-    plt.tight_layout()
-    plt.show()
-    
-    print("✅ Created 8 revolutionary visualizations")
+    print(f"✅ Created {plot_count} revolutionary visualizations")
 
-# ============================================================
-# STEP 5: PREDICTIVE MODELING REVOLUTION
-# ============================================================
-
-def revolutionary_modeling(df, target_col='high_performance'):
+def revolutionary_model(df):
     """
-    Advanced ML modeling for agricultural predictions
+    Build predictive models for agricultural insights
     """
-    print(f"\n🤖 STEP 5: PREDICTIVE MODELING REVOLUTION")
+    print(f"\n🤖 STEP 5: PREDICTIVE MODELING")
     print("-"*60)
     
     try:
-        from sklearn.model_selection import train_test_split, cross_val_score
-        from sklearn.preprocessing import StandardScaler
-        from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-        from sklearn.linear_model import LogisticRegression
-        from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
-        import xgboost as xgb
+        from sklearn.model_selection import train_test_split
+        from sklearn.ensemble import RandomForestClassifier
+        from sklearn.metrics import classification_report, confusion_matrix
         
-        # Prepare data
+        # Create target variable: High performance farmers
+        if 'performance_score' in df.columns:
+            median_perf = df['performance_score'].median()
+            df['high_performer'] = (df['performance_score'] > median_perf).astype(int)
+            target_col = 'high_performer'
+        elif 'social_capital_index' in df.columns:
+            median_sc = df['social_capital_index'].median()
+            df['high_social_capital'] = (df['social_capital_index'] > median_sc).astype(int)
+            target_col = 'high_social_capital'
+        else:
+            print("⚠️ No suitable target variable found. Creating synthetic target.")
+            return None
+        
+        # Prepare features
         X = df.select_dtypes(include=[np.number]).drop(columns=[target_col], errors='ignore')
-        y = df[target_col] if target_col in df.columns else None
+        y = df[target_col]
         
-        if y is None:
-            print("⚠️ No target column found. Creating synthetic target for demonstration.")
-            # Create synthetic target for demonstration
-            if 'social_capital_index' in df.columns:
-                median_sc = df['social_capital_index'].median()
-                y = (df['social_capital_index'] > median_sc).astype(int)
-                X = X.drop(columns=['social_capital_index'], errors='ignore')
-            else:
-                print("❌ Cannot create synthetic target. Skipping modeling.")
-                return None
-        
-        # Remove any remaining non-numeric columns
-        X = X.select_dtypes(include=[np.number])
-        
-        # Handle missing values
+        # Handle any remaining missing values
         X = X.fillna(X.median())
         
         # Split data
@@ -574,196 +403,112 @@ def revolutionary_modeling(df, target_col='high_performance'):
             X, y, test_size=0.2, random_state=42, stratify=y
         )
         
-        print(f"📈 Modeling Setup:")
+        print(f"📈 Model Setup:")
         print(f"   Features: {X.shape[1]}")
         print(f"   Training samples: {X_train.shape[0]}")
         print(f"   Testing samples: {X_test.shape[0]}")
-        print(f"   Positive class proportion: {y.mean():.2%}")
+        print(f"   Positive class: {y.mean():.1%}")
         
-        # Scale features
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
+        # Train model
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        model.fit(X_train, y_train)
         
-        # Define models
-        models = {
-            'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
-            'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
-            'Gradient Boosting': GradientBoostingClassifier(n_estimators=100, random_state=42),
-            'XGBoost': xgb.XGBClassifier(n_estimators=100, random_state=42, use_label_encoder=False, eval_metric='logloss')
-        }
+        # Evaluate
+        y_pred = model.predict(X_test)
+        accuracy = (y_pred == y_test).mean()
         
-        # Train and evaluate models
-        results = {}
-        best_model = None
-        best_score = 0
+        print(f"\n🏆 Model Performance:")
+        print(f"   Accuracy: {accuracy:.3f}")
+        print(f"\n📊 Classification Report:")
+        print(classification_report(y_test, y_pred))
         
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        axes = axes.flatten()
+        # Feature importance
+        print(f"\n🎯 Top 10 Most Important Features:")
+        importances = pd.DataFrame({
+            'feature': X.columns,
+            'importance': model.feature_importances_
+        }).sort_values('importance', ascending=False)
         
-        for idx, (name, model) in enumerate(models.items()):
-            # Train model
-            model.fit(X_train_scaled, y_train)
-            
-            # Predict
-            y_pred = model.predict(X_test_scaled)
-            y_pred_proba = model.predict_proba(X_test_scaled)[:, 1] if hasattr(model, 'predict_proba') else None
-            
-            # Calculate metrics
-            accuracy = (y_pred == y_test).mean()
-            auc = roc_auc_score(y_test, y_pred_proba) if y_pred_proba is not None else 0
-            
-            # Cross-validation
-            cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='accuracy')
-            
-            results[name] = {
-                'accuracy': accuracy,
-                'auc': auc,
-                'cv_mean': cv_scores.mean(),
-                'cv_std': cv_scores.std(),
-                'model': model
-            }
-            
-            # Update best model
-            if auc > best_score:
-                best_score = auc
-                best_model = model
-            
-            # Plot confusion matrix
-            cm = confusion_matrix(y_test, y_pred)
-            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=axes[idx])
-            axes[idx].set_title(f'{name}\nAccuracy: {accuracy:.3f}, AUC: {auc:.3f}')
-            axes[idx].set_xlabel('Predicted')
-            axes[idx].set_ylabel('Actual')
+        print(importances.head(10).to_string(index=False))
         
-        plt.suptitle('Model Performance Comparison', fontsize=16, fontweight='bold')
+        # ==== FIXED: Visualize feature importance ====
+        plt.figure(figsize=(12, 6))
+        top_features = importances.head(10)
+        plt.barh(range(len(top_features)), top_features['importance'])
+        plt.yticks(range(len(top_features)), top_features['feature'])
+        plt.gca().invert_yaxis()
+        plt.title('Top 10 Most Important Features', fontweight='bold')
+        plt.xlabel('Importance Score')
         plt.tight_layout()
-        plt.show()
+        plt.show(block=False)  # Don't block execution
+        plt.pause(3)  # Show for 3 seconds
+        plt.close()  # Close the figure
+        # ============================================
         
-        # Print results
-        print("\n🏆 MODEL PERFORMANCE SUMMARY:")
-        print("-"*50)
-        print(f"{'Model':<20} {'Accuracy':<10} {'AUC':<10} {'CV Mean':<10} {'CV Std':<10}")
-        print("-"*50)
-        
-        for name, metrics in results.items():
-            print(f"{name:<20} {metrics['accuracy']:<10.3f} {metrics['auc']:<10.3f} "
-                  f"{metrics['cv_mean']:<10.3f} {metrics['cv_std']:<10.3f}")
-        
-        # Feature Importance from best model
-        if hasattr(best_model, 'feature_importances_'):
-            print("\n📊 TOP 10 IMPORTANT FEATURES:")
-            importances = best_model.feature_importances_
-            feature_importance = pd.DataFrame({
-                'feature': X.columns,
-                'importance': importances
-            }).sort_values('importance', ascending=False)
-            
-            print(feature_importance.head(10).to_string(index=False))
-            
-            # Plot feature importance
-            plt.figure(figsize=(12, 6))
-            top_features = feature_importance.head(10)
-            plt.barh(range(len(top_features)), top_features['importance'])
-            plt.yticks(range(len(top_features)), top_features['feature'])
-            plt.gca().invert_yaxis()
-            plt.title('Top 10 Most Important Features', fontweight='bold')
-            plt.xlabel('Importance Score')
-            plt.tight_layout()
-            plt.show()
-        
-        return results, best_model
+        return model
         
     except Exception as e:
-        print(f"⚠️ Modeling skipped due to: {str(e)}")
+        print(f"⚠️ Modeling error: {str(e)}")
         return None
 
-# ============================================================
-# STEP 6: MONETIZATION & VALUE CREATION
-# ============================================================
-
-def revolutionary_monetization(df, insights, model_results, context):
+def revolutionary_monetize(df, context):
     """
-    Turn analysis into revenue-generating opportunities
+    Create monetization strategy from insights
     """
-    print(f"\n💰 STEP 6: REVOLUTIONARY MONETIZATION STRATEGY")
+    print(f"\n💰 STEP 6: MONETIZATION STRATEGY")
     print("-"*60)
     
-    # 6A: Identify Money-Making Opportunities
+    print("🚀 MONEY-MAKING OPPORTUNITIES:")
+    
     opportunities = [
         {
-            'product': 'Farmer Segmentation Dashboard',
-            'description': 'Interactive dashboard showing farmer segments, performance, and recommendations',
-            'target_clients': ['NGOs', 'Government Agencies', 'Agribusiness Companies'],
-            'pricing': '$1,500 - $5,000 one-time + $200/month maintenance',
-            'development_time': '2-3 weeks',
-            'resources_needed': ['Streamlit', 'Plotly', 'Heroku/AWS']
+            'name': 'Farmer Segmentation Dashboard',
+            'description': 'Interactive dashboard showing farmer segments and performance',
+            'clients': ['NGOs', 'Government', 'Agribusiness'],
+            'price': '$1,500 - $5,000',
+            'timeline': '2-3 weeks'
         },
         {
-            'product': 'Predictive Analytics Service',
-            'description': 'ML model predicting which farmers need intervention, with API access',
-            'target_clients': ['Microfinance Institutions', 'Input Suppliers', 'Insurance Companies'],
-            'pricing': '$300/month subscription',
-            'development_time': '3-4 weeks',
-            'resources_needed': ['FastAPI', 'Scikit-learn/XGBoost', 'Docker']
+            'name': 'Social Capital Assessment Service',
+            'description': 'Comprehensive analysis of farmer networks and trust',
+            'clients': ['Development Organizations', 'Cooperatives'],
+            'price': '$2,000 - $8,000',
+            'timeline': '3-4 weeks'
         },
         {
-            'product': 'Research & Impact Report',
-            'description': 'Professional report with actionable insights for donors/funders',
-            'target_clients': ['International Donors', 'Research Institutions', 'Government'],
-            'pricing': '$2,000 - $10,000 per report',
-            'development_time': '1-2 weeks',
-            'resources_needed': ['LaTeX/R Markdown', 'Data visualization skills']
-        },
-        {
-            'product': 'Training Program Design',
-            'description': 'Customized training curriculum based on data insights',
-            'target_clients': ['Extension Services', 'Farmer Cooperatives', 'NGOs'],
-            'pricing': '$3,000 - $8,000 per program',
-            'development_time': '2-3 weeks',
-            'resources_needed': ['Instructional design', 'Subject matter expertise']
+            'name': 'Yield Prediction Model',
+            'description': 'ML model predicting yield changes based on farmer characteristics',
+            'clients': ['Insurance Companies', 'Input Suppliers'],
+            'price': '$300/month subscription',
+            'timeline': '4-5 weeks'
         }
     ]
     
-    # 6B: Print Opportunities
-    print("🚀 MONEY-MAKING OPPORTUNITIES:\n")
     for i, opp in enumerate(opportunities, 1):
-        print(f"{i}. {opp['product']}")
+        print(f"\n{i}. {opp['name']}")
         print(f"   📝 {opp['description']}")
-        print(f"   🎯 Clients: {', '.join(opp['target_clients'])}")
-        print(f"   💰 Price: {opp['pricing']}")
-        print(f"   ⏱️ Development: {opp['development_time']}")
-        print()
+        print(f"   🎯 Clients: {', '.join(opp['clients'])}")
+        print(f"   💰 Price: {opp['price']}")
+        print(f"   ⏱️ Timeline: {opp['timeline']}")
     
-    # 6C: Immediate Action Plan
-    print("🎯 IMMEDIATE 7-DAY ACTION PLAN:")
-    print("   Day 1-2: Create GitHub portfolio with this analysis")
-    print("   Day 3: Write LinkedIn post about findings")
-    print("   Day 4: Create simple Streamlit dashboard")
-    print("   Day 5: Reach out to 3 potential clients")
-    print("   Day 6: Write blog post on Medium")
-    print("   Day 7: Join agricultural data science communities")
-    
-    # 6D: Pricing Strategy
-    print("\n💵 PRICING STRATEGY FOR AFRICAN MARKET:")
-    print("   • NGOs/Government: $1,000 - $5,000 per project")
-    print("   • Agribusiness: $300 - $1,500 monthly subscription")
-    print("   • International Donors: $5,000 - $20,000 per research")
-    print("   • Consulting: $50 - $150 per hour")
+    print("\n🎯 IMMEDIATE ACTION STEPS:")
+    print("   1. Create GitHub portfolio with this analysis")
+    print("   2. Build Streamlit dashboard")
+    print("   3. Write blog post on LinkedIn")
+    print("   4. Reach out to 3 potential clients")
     
     return opportunities
-
-# ============================================================
-# MAIN PIPELINE EXECUTION
-# ============================================================
 
 def execute_revolution(data_path, dataset_name="Agricultural Data"):
     """
     Execute the complete revolutionary pipeline
     """
     print("\n" + "="*80)
-    print("🚀 EXECUTING AFRICAN AGRICULTURE DATA SCIENCE REVOLUTION")
+    print("🚀 EXECUTING AFRICAN AGRICULTURE DATA REVOLUTION")
     print("="*80)
+    
+    # Step 0: Mindset
+    RevolutionMindset.manifesto()
     
     # Load data
     try:
@@ -772,265 +517,174 @@ def execute_revolution(data_path, dataset_name="Agricultural Data"):
         elif data_path.endswith('.csv'):
             df = pd.read_csv(data_path)
         else:
-            raise ValueError("Unsupported file format. Use .xlsx or .csv")
+            raise ValueError("Use .xlsx or .csv files")
+        
+        print(f"\n✅ Data loaded: {len(df)} records")
+        
     except Exception as e:
         print(f"❌ Error loading data: {e}")
         return None
     
-    # Step 0: Mindset
-    AfricanAgricultureRevolution.mindset()
+    # Execute pipeline
+    insights = revolutionary_diagnose(df, dataset_name)
+    df_clean = revolutionary_clean(df)
+    df_features = revolutionary_features(df_clean)
+    revolutionary_visualize(df_features, dataset_name)
+    model = revolutionary_model(df_features)
+    opportunities = revolutionary_monetize(df_features, dataset_name)
     
-    # Step 1: Diagnose
-    insights = diagnose_data(df, dataset_name)
-    
-    # Step 2: Clean
-    df_clean, transformations = revolutionary_clean(df)
-    
-    # Step 3: Engineer Features
-    df_features, features_created = revolutionary_features(df_clean, dataset_name)
-    
-    # Step 4: Visualize
-    revolutionary_visualizations(df_features, dataset_name)
-    
-    # Step 5: Model
-    model_results = revolutionary_modeling(df_features)
-    
-    # Step 6: Monetize
-    opportunities = revolutionary_monetization(df_features, insights, model_results, dataset_name)
-    
-    # Save Results
+    # Save results
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_path = f"results_{dataset_name.replace(' ', '_')}_{timestamp}.xlsx"
+    output_dir = "results"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    output_path = f"{output_dir}/results_{dataset_name.replace(' ', '_')}_{timestamp}.xlsx"
     
     with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
         df_features.to_excel(writer, sheet_name='Processed_Data', index=False)
         
         # Save summary
-        summary = pd.DataFrame({
-            'Metric': ['Total Farmers', 'Features Created', 'Social Capital Avg', 
-                      'Resource Access Avg', 'High Performance %'],
-            'Value': [len(df_features), len(features_created),
+        summary_data = {
+            'Metric': ['Total Farmers', 'Variables Processed', 
+                      'Social Capital Avg', 'Resource Access Avg'],
+            'Value': [len(df_features), df_features.shape[1],
                      df_features.get('social_capital_index', pd.Series([0])).mean(),
-                     df_features.get('resource_access_index', pd.Series([0])).mean(),
-                     df_features.get('high_performance', pd.Series([0])).mean() * 100]
-        })
-        summary.to_excel(writer, sheet_name='Summary', index=False)
+                     df_features.get('resource_access_index', pd.Series([0])).mean()]
+        }
+        pd.DataFrame(summary_data).to_excel(writer, sheet_name='Summary', index=False)
     
     print(f"\n✅ REVOLUTION COMPLETE!")
     print(f"📁 Results saved to: {output_path}")
-    print(f"📊 Processed {len(df_features)} farmers with {df_features.shape[1]} features")
     
     return {
         'raw_data': df,
-        'cleaned_data': df_clean,
-        'featured_data': df_features,
-        'model_results': model_results,
+        'processed_data': df_features,
+        'model': model,
         'opportunities': opportunities,
         'output_file': output_path
     }
 
-# ============================================================
-# GOOGLE COLAB INTEGRATION FUNCTIONS
-# ============================================================
-
-def setup_colab_environment():
+# Google Colab integration
+def setup_colab():
     """
-    Setup Google Colab environment for African agriculture analysis
+    Setup code for Google Colab
     """
-    print("Setting up Google Colab environment...")
-    
     colab_code = """
-# ============================================
-# AFRICAN AGRICULTURE DATA SCIENCE - COLAB SETUP
+# AFRICAN AGRICULTURE REVOLUTION - COLAB SETUP
 # ============================================
 
-# Install required packages
-!pip install pandas numpy matplotlib seaborn plotly scikit-learn xgboost openpyxl -q
+# 1. Install required packages
+!pip install pandas numpy matplotlib seaborn scikit-learn openpyxl -q
 !pip install streamlit -q
 
-# Import libraries
+# 2. Import libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import warnings
 warnings.filterwarnings('ignore')
 
-# Mount Google Drive
+# 3. Mount Google Drive (optional)
 from google.colab import drive
 drive.mount('/content/drive')
 
-# Clone your GitHub repository
-!git clone https://github.com/YOUR_USERNAME/African-Agriculture-Revolution.git
+# 4. Clone your GitHub repository
+!git clone https://github.com/ErwinNanyaro/African-Agriculture-Revolution.git
 
-# Navigate to your project
+# 5. Navigate to your project
 %cd /content/African-Agriculture-Revolution
 
 print("✅ Environment setup complete!")
 print("📁 Files available:")
 !ls -la
     """
-    
     return colab_code
 
-def create_colab_notebook():
+def get_github_guide():
     """
-    Create a Google Colab notebook template
-    """
-    notebook_content = {
-        'cells': [
-            {
-                'cell_type': 'markdown',
-                'metadata': {},
-                'source': [
-                    '# 🌍 African Agriculture Data Science Revolution\n',
-                    '## From SPSS/Stata to Modern Data Science\n',
-                    '### Google Colab + GitHub Integration\n'
-                ]
-            },
-            {
-                'cell_type': 'code',
-                'metadata': {},
-                'source': [
-                    '# Install and import all required packages\n',
-                    '!pip install pandas numpy matplotlib seaborn plotly scikit-learn xgboost streamlit -q\n',
-                    'import pandas as pd\n',
-                    'import numpy as np\n',
-                    'import matplotlib.pyplot as plt\n',
-                    'import seaborn as sns\n',
-                    'import warnings\n',
-                    'warnings.filterwarnings("ignore")\n',
-                    '\n',
-                    'print("✅ Packages installed and imported!")'
-                ]
-            },
-            {
-                'cell_type': 'markdown',
-                'metadata': {},
-                'source': [
-                    '## 🔗 Connect to GitHub\n',
-                    'Clone your repository to access all scripts'
-                ]
-            },
-            {
-                'cell_type': 'code',
-                'metadata': {},
-                'source': [
-                    '# Clone your GitHub repository\n',
-                    '!git clone https://github.com/YOUR_USERNAME/African-Agriculture-Revolution.git\n',
-                    '%cd African-Agriculture-Revolution\n',
-                    '!ls'
-                ]
-            },
-            {
-                'cell_type': 'markdown',
-                'metadata': {},
-                'source': [
-                    '## 📊 Load Your Strawberry Farmer Data\n',
-                    'Replace with your actual data path'
-                ]
-            },
-            {
-                'cell_type': 'code',
-                'metadata': {},
-                'source': [
-                    '# Load your data\n',
-                    'from scripts.secret_recipe_template import execute_revolution\n',
-                    '\n',
-                    '# Execute the complete pipeline\n',
-                    'results = execute_revolution(\n',
-                    '    data_path="data/Strawberry_Farmer_Data.xlsx",\n',
-                    '    dataset_name="Tanzania Strawberry Farmers"\n',
-                    ')'
-                ]
-            },
-            {
-                'cell_type': 'markdown',
-                'metadata': {},
-                'source': [
-                    '## 📈 Create Interactive Dashboard\n',
-                    'Generate an interactive report'
-                ]
-            },
-            {
-                'cell_type': 'code',
-                'execution_count': None,
-                'metadata': {},
-                'outputs': [],
-                'source': [
-                    '# Create interactive visualizations\n',
-                    'import plotly.express as px\n',
-                    '\n',
-                    '# Assuming df_features is in results\n',
-                    'df_features = results[\'featured_data\']\n',
-                    '\n',
-                    '# Interactive scatter plot\n',
-                    'if \'age_numeric\' in df_features.columns and \'social_capital_index\' in df_features.columns:\n',
-                    '    fig = px.scatter(df_features, x=\'age_numeric\', y=\'social_capital_index\',\n',
-                    '                     color=\'farmer_segment\' if \'farmer_segment\' in df_features.columns else None,\n',
-                    '                     title=\'Age vs Social Capital Index\',\n',
-                    '                     hover_data=[\'experience_years\', \'resource_access_index\'])\n',
-                    '    fig.show()'
-                ]
-            },
-            {
-                'cell_type': 'markdown',
-                'metadata': {},
-                'source': [
-                    '## 💰 Monetization Strategy\n',
-                    'Review the money-making opportunities'
-                ]
-            },
-            {
-                'cell_type': 'code',
-                'metadata': {},
-                'source': [
-                    '# Review monetization opportunities\n',
-                    'opportunities = results[\'opportunities\']\n',
-                    'print("🚀 MONEY-MAKING OPPORTUNITIES FOUND:")\n',
-                    'for i, opp in enumerate(opportunities, 1):\n',
-                    '    print(f"{i}. {opp[\'product\']} - {opp[\'pricing\']}")'
-                ]
-            },
-            {
-                'cell_type': 'markdown',
-                'metadata': {},
-                'source': [
-                    '## 📤 Save and Share Results\n',
-                    'Save to GitHub and create shareable reports'
-                ]
-            },
-            {
-                'cell_type': 'code',
-                'metadata': {},
-                'source': [
-                    '# Save to GitHub\n',
-                    '!git add .\n',
-                    '!git commit -m "Colab analysis: Strawberry farmer insights"\n',
-                    '!git push origin main\n',
-                    '\n',
-                    'print("✅ Results saved to GitHub!")'
-                ]
-            }
-        ]
-    }
-    
-    return notebook_content
-
-# ============================================================
-# GITHUB INTEGRATION GUIDE
-# ============================================================
-
-def github_integration_guide():
-    """
-    Guide for integrating Google Colab with GitHub
+    GitHub integration guide - SIMPLIFIED VERSION
     """
     guide = """
-# 📚 GOOGLE COLAB + GITHUB INTEGRATION GUIDE
+# GITHUB + GOOGLE COLAB INTEGRATION GUIDE
 
-## 1. INITIAL SETUP ON YOUR LAPTOP
-1. Save all scripts to: C:\\Users\\hp\\OneDrive\\Documents\\African_Agriculture_Revolution
-2. Initialize Git repository:
+## 1. INITIAL GITHUB SETUP (Already done)
+
+## 2. DAILY WORKFLOW:
+
+### On your laptop:
+1. Save scripts to: C:\\Users\\hp\\OneDrive\\Documents\\African_Agriculture_Revolution
+2. Commit changes:
+   git add .
+   git commit -m "Update analysis"
+   git push origin main
+
+### On Google Colab:
+1. Open https://colab.research.google.com
+2. Clone your repository:
+   !git clone https://github.com/ErwinNanyaro/African-Agriculture-Revolution.git
+   %cd African-Agriculture-Revolution
+3. Run analysis
+4. Push results back:
+   !git add results/
+   !git commit -m "Colab analysis results"
+   !git push origin main
+
+## 3. FOLDER STRUCTURE:
+African-Agriculture-Revolution/
+├── data/              # Your datasets
+├── scripts/           # Python scripts
+├── notebooks/         # Colab notebooks
+├── results/           # Analysis outputs
+└── README.md          # Project documentation
+    """
+    return guide
+
+# Main execution
+if __name__ == "__main__":
+    print("="*80)
+    print("🌍 AFRICAN AGRICULTURE DATA SCIENCE REVOLUTION")
+    print("="*80)
+    
+    # Get data path
+    import os
+    
+    # Try default path first
+    default_path = "C:/Users/hp/OneDrive/Documents/African_Agriculture_Revolution/data/Strawberry_Farmer_Data.xlsx"
+    
+    if os.path.exists(default_path):
+        data_path = default_path
+        print(f"📁 Using data at: {data_path}")
+    else:
+        print("📁 Please enter path to your data file:")
+        data_path = input("Path: ").strip()
+    
+    # Execute revolution
+    try:
+        results = execute_revolution(
+            data_path=data_path,
+            dataset_name="Tanzania Strawberry Farmers"
+        )
+        
+        if results:
+            print("\n" + "="*80)
+            print("🎉 REVOLUTION SUCCESSFUL!")
+            print("="*80)
+            
+            print("\n📋 NEXT STEPS:")
+            print("   1. Review the Excel file in 'results/' folder")
+            print("   2. Run on 2 more datasets to build portfolio")
+            print("   3. Create GitHub repository (you already have)")
+            print("   4. Write blog post about your findings")
+            
+            # Show integration guide
+            print("\n" + "="*80)
+            print(get_github_guide())
+            print("="*80)
+            
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        print("\n💡 TROUBLESHOOTING:")
+        print("   1. Install packages: pip install pandas openpyxl matplotlib seaborn scikit-learn")
+        print("   2. Check file path exists")
+        print("   3. Ensure correct file format (.xlsx or .csv)")
